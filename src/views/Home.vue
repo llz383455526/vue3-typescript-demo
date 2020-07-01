@@ -1,18 +1,24 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <Calculator :salt="10" />
+    <input type="number" v-model="salt" />
+    <Calculator :salt="salt" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Calculator from "@/components/Calculator";
+import Calculator from '@/components/Calculator'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Calculator
+  },
+  data() {
+    return {
+      salt: 10
+    }
   }
-};
+}
 </script>
