@@ -7,13 +7,13 @@
       <span>=</span>
       <input type="number" v-model="result" />
     </div>
-    <button class="btn" @click="add2">求和</button>
+    <div>salt: {{salt}}</div>
   </div>
 </template>
 
 <script lang="ts">
 // export declare function ref<T extends object>(value: T): T extends Ref ? T : Ref<UnwrapRef<T>>;
-import { ref } from "vue"
+import { ref, computed } from "vue"
 
 
 export default {
@@ -24,15 +24,12 @@ export default {
   setup(props) {
     const num1 = ref(0)
     const num2 = ref(1)
-    const result = ref(1)
-
-    const add2 = ()=>{result.value = num1.value + num2.value + props.salt}
+    const result = computed(() => num1.value + num2.value + props.salt)
 
     return {
       num1,
       num2,
-      result,
-      add2
+      result
     }
   }
 };
