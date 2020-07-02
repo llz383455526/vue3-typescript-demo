@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <div class="content">
-      <input type="number" v-model="num1" />
+      <input type="number" v-model="num1" ref="refNum1" />
       <span>+</span>
-      <input type="number" v-model="num2" />
+      <input type="number" v-model="num2" ref="refNum2" />
       <span>=</span>
       <input type="number" v-model="result" />
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, watchEffect } from 'vue'
+import { ref, computed, onMounted, reactive, readonly } from 'vue'
 
 export default {
   name: 'Calculator',
@@ -21,45 +21,31 @@ export default {
     salt: { type: Number, default: 100 }
   },
   setup(props: { salt: number }) {
+    const refNum1 = ref(null)
+    const refNum2 = ref(null)
     const num1 = ref(0)
     const num2 = ref(1)
     const result = computed(() => num1.value + num2.value + props.salt)
 
-    watch(
-      [() => props.salt, num1],
-      ([newSalt, newNum1], [prevSalt, preNum1]) => {
-        console.log('watch props:', `${prevSalt}:${newSalt}, ${preNum1}:${newNum1}`)
-      },
-      { immediate: true, deep: true }
+    const reactiveData = reactive({ data: { name: 'llz' } })
+    const readonlyData = readonly(reactiveData)
+
+    reactiveData.data.name = 'hago'
+    readonlyData.data.name = 'xxx'
+    console.log(
+      `origin data.name: ${reactiveData.data.name}, readonly data.name:  ${readonlyData.data.name}`
     )
 
-    watch(num2, () => console.log('num2:', num2.value))
-    // watch( props.salt, ()=>{ console.log('watch props:', props.salt)}, {immediate: true, deep: true}) // 错误
-
-    const stopHandler1 = watchEffect(
-      onInvalidate => {
-        console.log(`watch Effect 1:`, num1.value, num2.value)
-        function handler() {
-          console.log(`resize event triggered`)
-        }
-
-        window.addEventListener('resize', handler)
-        onInvalidate(() => {
-          window.removeEventListener('resize', handler) // 注册一个解除监听的处理函数，否则随着数据改变，监听处理队列会越来越多
-        })
-      },
-      { flush: 'post' }
-    )
-
-    watchEffect(() => {
-      console.log('watch effect 2:', num2.value)
+    console.log(refNum1.value, refNum2.value) // null null
+    onMounted(() => {
+      console.log(refNum1.value, refNum2.value)
     })
-
     return {
       num1,
       num2,
       result,
-      stopHandler1
+      refNum1,
+      refNum2
     }
   }
 }
