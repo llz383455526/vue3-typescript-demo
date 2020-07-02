@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <div class="content">
-      <input type="number" v-model="num1"/>
+      <input type="number" v-model="num1" />
       <span>+</span>
-      <input type="number" v-model="num2"/>
+      <input type="number" v-model="num2" />
       <span>=</span>
       <input type="number" v-model="result" />
     </div>
@@ -16,11 +16,11 @@
 import { ref, computed, watch, watchEffect } from 'vue'
 
 export default {
-  name: "Calculator",
+  name: 'Calculator',
   props: {
     salt: { type: Number, default: 100 }
   },
-  setup(props) {
+  setup(props: { salt: number }) {
     const num1 = ref(0)
     const num2 = ref(1)
     const result = computed(() => num1.value + num2.value + props.salt)
@@ -28,7 +28,7 @@ export default {
     watch(
       [() => props.salt, num1],
       ([newSalt, newNum1], [prevSalt, preNum1]) => {
-        console.log('watch props:', newSalt, newNum1)
+        console.log('watch props:', `${prevSalt}:${newSalt}, ${preNum1}:${newNum1}`)
       },
       { immediate: true, deep: true }
     )
@@ -36,22 +36,24 @@ export default {
     watch(num2, () => console.log('num2:', num2.value))
     // watch( props.salt, ()=>{ console.log('watch props:', props.salt)}, {immediate: true, deep: true}) // 错误
 
-    const stopHandler1 = watchEffect( onInvalidate => { //
-      console.log(`watch Effect 1： `, num1.value, num2.value)
-      function handler(e:any) {
-        console.log(`resize event`, e)
-      }
+    const stopHandler1 = watchEffect(
+      onInvalidate => {
+        console.log(`watch Effect 1:`, num1.value, num2.value)
+        function handler() {
+          console.log(`resize event triggered`)
+        }
 
-      window.addEventListener('resize', handler)
-      onInvalidate(()=>{
-        window.removeEventListener('resize', handler) // 注册一个解除监听的处理函数，否则随着数据改变，监听处理队列会越来越多
-      })
-    }, {flush: 'post'})
+        window.addEventListener('resize', handler)
+        onInvalidate(() => {
+          window.removeEventListener('resize', handler) // 注册一个解除监听的处理函数，否则随着数据改变，监听处理队列会越来越多
+        })
+      },
+      { flush: 'post' }
+    )
 
-    const stopHandler2 = watchEffect( oninvalidate => {
+    watchEffect(() => {
       console.log('watch effect 2:', num2.value)
     })
-
 
     return {
       num1,
