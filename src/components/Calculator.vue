@@ -13,7 +13,8 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, reactive, readonly } from 'vue'
+import { ref, computed, onMounted, reactive, readonly, inject } from 'vue'
+import { PROVIDE_INJECT_KEY_COUNT } from '@/shared/constants'
 
 export default {
   name: 'Calculator',
@@ -40,6 +41,9 @@ export default {
     onMounted(() => {
       console.log(refNum1.value, refNum2.value)
     })
+
+    const config = inject(PROVIDE_INJECT_KEY_COUNT, {defaultValue: 10})
+    console.log('inject config:', config)
     return {
       num1,
       num2,

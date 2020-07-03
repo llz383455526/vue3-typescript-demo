@@ -6,9 +6,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 // @ is an alias to /src
-import Calculator from '@/components/Calculator'
+import Calculator from '@/components/Calculator.vue'
+import { provide } from 'vue'
+import { PROVIDE_INJECT_KEY_COUNT } from '@/shared/constants'
 
 export default {
   name: 'Home',
@@ -19,6 +21,9 @@ export default {
     return {
       salt: 10
     }
+  },
+  setup() {
+    provide(PROVIDE_INJECT_KEY_COUNT, {count: 10, defaultValue: 0})
   }
 }
 </script>
