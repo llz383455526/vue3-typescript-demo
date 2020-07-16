@@ -7,14 +7,14 @@
       <span>=</span>
       <input type="number" v-model="result" />
     </div>
-    <div>salt: {{ salt }}</div>
-    <button @click="stopHandler1()">停止第一个watchEffect</button>
+    <div>provide/inject data: {{ config.count }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, reactive, readonly, inject } from 'vue'
+import { ref, computed, onMounted, reactive, readonly, inject, InjectionKey } from 'vue'
 import { PROVIDE_INJECT_KEY_COUNT } from '@/shared/constants'
+import { Config } from '../shared/interface'
 
 export default {
   name: 'Calculator',
@@ -42,14 +42,15 @@ export default {
       console.log(refNum1.value, refNum2.value)
     })
 
-    const config = inject(PROVIDE_INJECT_KEY_COUNT, {defaultValue: 10})
-    console.log('inject config:', config)
+    const config: Config = inject(PROVIDE_INJECT_KEY_COUNT, { defaultValue: 10 })
+    // const p = reactive(config)
     return {
       num1,
       num2,
       result,
       refNum1,
-      refNum2
+      refNum2,
+      config
     }
   }
 }
