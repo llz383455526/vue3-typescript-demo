@@ -79,8 +79,8 @@ export default {
           name: 'llz'
         }
       })
-      return toRefs(state) // 如果不加toRefs，直接返回，解构获取的属性就不再具有响应式特性
-      // return state
+      return toRefs(state) 
+      // return state // 如果不加toRefs，直接返回，解构获取的属性就不再具有响应式特性. 修改foo的值，ui不会有变化
     }
     const { foo } = useFeatureX()
     setInterval(() => {
