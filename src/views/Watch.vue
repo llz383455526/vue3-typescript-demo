@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { watch, reactive, watchEffect, ref, onMounted } from 'vue'
+import { watch, watchEffect, ref } from 'vue'
 export default {
   name: 'Watch',
   setup() {
