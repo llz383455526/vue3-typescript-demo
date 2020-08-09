@@ -9,7 +9,18 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, unref, toRefs, isRef, customRef, toRef, reactive, isReactive, shallowRef } from 'vue'
+import {
+  ref,
+  onMounted,
+  unref,
+  toRefs,
+  isRef,
+  customRef,
+  toRef,
+  reactive,
+  isReactive,
+  shallowRef
+} from 'vue'
 export default {
   name: 'RefDemo',
   props: {
@@ -35,16 +46,16 @@ export default {
       refVar.value = 12 // 2.2 通过修改refObj.value的值来改变这个响应式对象
     }, 2000)
 
-    const refObj = ref({name: 'llz'})
-    console.log("为object类型数据创建Ref:", refObj, isReactive(refObj.value))
+    const refObj = ref({ name: 'llz' })
+    console.log('为object类型数据创建Ref:', refObj, isReactive(refObj.value))
     setTimeout(() => {
       refObj.value.name = 'cxt' // 2.2 通过修改refObj.value的值来改变这个响应式对象
     }, 2000)
 
     /**
-     * 3. 使用toRef(obj, key) 为一个对象obj(普通对象或者reactive对象)的key创建一个ref，这个ref对象可以被传递并保持响应特性。 
+     * 3. 使用toRef(obj, key) 为一个对象obj(普通对象或者reactive对象)的key创建一个ref，这个ref对象可以被传递并保持响应特性。
      */
-    const reactiveObj = reactive({age: 18})
+    const reactiveObj = reactive({ age: 18 })
     const toRefVar = toRef(reactiveObj, 'age')
     console.log('toRefVar:', toRefVar)
     toRefVar.value = 13
@@ -73,20 +84,20 @@ export default {
     const myCustomRef = customRef((track, trigger) => {
       let value = 'initial'
       return {
-        get(){
+        get() {
           return value
         },
-        set(newValue:string) {
+        set(newValue: string) {
           value = `${newValue}==`
         }
       }
     })
-    console.log('myCustomRef:',myCustomRef)
+    console.log('myCustomRef:', myCustomRef)
 
     /**
      * 8. shallowRef() 功能基本同ref()一样。唯一的不同是当传入的参数是一个对象时, 不会将这个对象转换为reactive对象，这也意味着它不具备响应式特性。
      */
-    const shallowRefObj = shallowRef({name: 'llz'})
+    const shallowRefObj = shallowRef({ name: 'llz' })
     console.log('为object类型数据创建shallowRef:', shallowRefObj)
     setTimeout(() => {
       shallowRefObj.value.name = 'cxt' // 通过修改refObj.value的值来改变这个响应式对象，不会刷新页面

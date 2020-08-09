@@ -14,8 +14,11 @@ import Calculator from '@/components/Calculator.vue'
 import ReactiveUtils from '@/components/ReactiveUtils.vue'
 import { provide, reactive } from 'vue'
 import { PROVIDE_INJECT_KEY_COUNT } from '@/shared/constants'
+import { APP_CONFIG } from '@/shared/constants'
+import { inject } from 'vue'
+import { globalPropertiesInterface } from '@/shared/interface'
 
-export default {
+export default{
   name: 'Home',
   components: {
     Calculator,
@@ -27,12 +30,10 @@ export default {
       info: { name: 'llz', age: 18 }
     }
   },
-  setup() {
-    const data = reactive({ count: 10, defaultValue: 0 })
-    provide(PROVIDE_INJECT_KEY_COUNT, data)
-    setInterval(() => {
-      data.count++
-    }, 1000)
+  //Child.vue
+  setup(props, context) {
+    const config = inject(APP_CONFIG)
+    config?.globalProperties.$http()
   }
 }
 </script>

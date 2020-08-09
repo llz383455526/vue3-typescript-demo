@@ -15,7 +15,37 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/ref',
     name: 'Ref',
-    component: () => import(/* webpackChunkName: "setup" */ '../views/RefDemo.vue')
+    component: () => import(/* webpackChunkName: "ref" */ '../views/Ref.vue')
+  },
+  {
+    path: '/reactive',
+    name: 'Reactive',
+    component: () => import(/* webpackChunkName: "reactive" */ '../views/Reactive.vue')
+  },
+  {
+    path: '/watch',
+    name: 'Watch',
+    component: () => import(/* webpackChunkName: "watch" */ '../views/Watch.vue')
+  },
+  {
+    path: '/slot',
+    name: 'Slot',
+    component: () => import(/* webpackChunkName: "slot" */ '../views/Slot.vue')
+  },
+  {
+    path: '/vmodel',
+    name: 'Vmodel',
+    component: () => import(/* webpackChunkName: "vmodel" */ '../views/Vmodel.vue')
+  },
+  {
+    path: '/globalApi',
+    name: 'globalApi',
+    component: () => import(/* webpackChunkName: "globalApi" */ '../views/GlobalApi.vue')
+  },
+  {
+    path: '/filter',
+    name: 'filter',
+    component: () => import(/* webpackChunkName: "filter" */ '../views/Filter.vue')
   },
   {
     path: '/about',
