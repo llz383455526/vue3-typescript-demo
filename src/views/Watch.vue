@@ -19,14 +19,14 @@ export default {
       { immediate: true }
     )
     a.value = 2
-    
+
     const count = ref(0)
 
-      watchEffect(() => {
-        console.log(count.value)
-      })
+    watchEffect(() => {
+      console.log(count.value)
+    })
 
-      count.value = 2
+    count.value = 2
     return {
       demoRef,
       a,
