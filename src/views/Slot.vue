@@ -1,6 +1,6 @@
 <template>
   <Child>
-    <div>default slot content from parent</div>
+    <div class="default">default slot content from parent</div>
 
     <template #name>
       <div>name slot content from parent</div>
@@ -20,5 +20,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.default {
+  color: green
+}
+::v-deep(.default-title) {  // 修改子组件样式
+  color: red
+}
 </style>

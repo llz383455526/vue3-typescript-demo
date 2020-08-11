@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="child-wrapper">
   
-    <h1>default</h1>
+    <h1 class="default-title">default</h1>
     <slot></slot>
 
     <h1>name slot</h1>
@@ -27,6 +27,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+::v-slotted(.default) { // 子组件修改父组件传进来slot内容的样式
+  color: red;
+  font-size: 36px;
+}
+.default-title {
+  color: blue
+}
 </style>
