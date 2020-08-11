@@ -53,6 +53,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "render" */ '../views/RenderApi.vue')
   },
   {
+    path: '/teleport',
+    name: 'teleport',
+    component: () => import(/* webpackChunkName: "teleport" */ '../views/Teleport.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
