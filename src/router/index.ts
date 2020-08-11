@@ -48,6 +48,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "filter" */ '../views/Filter.vue')
   },
   {
+    path: '/render',
+    name: 'render',
+    component: () => import(/* webpackChunkName: "render" */ '../views/RenderApi.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
