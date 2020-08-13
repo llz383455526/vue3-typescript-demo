@@ -58,6 +58,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "teleport" */ '../views/Teleport.vue')
   },
   {
+    path: '/lifecycle',
+    name: 'lifecycle',
+    component: () => import(/* webpackChunkName: "lifecycle" */ '../views/LifeCycle.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
