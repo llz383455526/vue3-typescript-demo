@@ -19,7 +19,8 @@ import {
   toRef,
   reactive,
   isReactive,
-  shallowRef
+  shallowRef,
+  triggerRef
 } from 'vue'
 export default {
   name: 'RefDemo',
@@ -85,9 +86,11 @@ export default {
       let value = 'initial'
       return {
         get() {
+          track()
           return value
         },
         set(newValue: string) {
+          trigger()
           value = `${newValue}==`
         }
       }
@@ -96,11 +99,13 @@ export default {
 
     /**
      * 8. shallowRef() 功能基本同ref()一样。唯一的不同是当传入的参数是一个对象时, 不会将这个对象转换为reactive对象，这也意味着它不具备响应式特性。
+     * 9. triggerRef  主动触发shallowRef的修改
      */
     const shallowRefObj = shallowRef({ name: 'llz' })
     console.log('为object类型数据创建shallowRef:', shallowRefObj)
     setTimeout(() => {
       shallowRefObj.value.name = 'cxt' // 通过修改refObj.value的值来改变这个响应式对象，不会刷新页面
+      triggerRef(shallowRefObj) // 通过使用triggerRef()可以主动触发
     }, 2000)
 
     return {
