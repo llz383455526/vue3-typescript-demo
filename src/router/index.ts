@@ -65,6 +65,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/calculator',
     name: 'calculator',
+    props: {salt: 20},
     component: () => import(/* webpackChunkName: "calculator" */ '../views/Calculator/index.vue')
   },
   {

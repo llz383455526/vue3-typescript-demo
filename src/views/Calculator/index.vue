@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <h1>calculator demo</h1>
     <div class="content">
       <input type="number" v-model="num1" ref="refNum1" />
       <span>+</span>
@@ -7,14 +8,12 @@
       <span>=</span>
       <input type="number" v-model="result" />
     </div>
-    <div>provide/inject data: {{ config.count }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, reactive, readonly, inject, InjectionKey } from 'vue'
-import { PROVIDE_INJECT_KEY_COUNT } from '@/shared/constants'
-import { Config } from '../shared/interface'
+import { ref, computed } from 'vue'
+import { calculatLogic } from './common'
 
 export default {
   name: 'Calculator',
@@ -22,15 +21,7 @@ export default {
     salt: { type: Number, default: 100 }
   },
   setup(props: { salt: number }) {
-    
-    function calculatLogic(){
-      const num1 = ref(0)
-      const num2 = ref(1)
-      const result = computed(() => num1.value + num2.value + props.salt)
-      return {num1, num2, result}
-    }
-
-    const {num1, num2, result} = calculatLogic()
+    const { num1, num2, result } = calculatLogic(props.salt)
     return {
       num1,
       num2,
