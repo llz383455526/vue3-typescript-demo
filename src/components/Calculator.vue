@@ -22,35 +22,19 @@ export default {
     salt: { type: Number, default: 100 }
   },
   setup(props: { salt: number }) {
-    const refNum1 = ref(null)
-    const refNum2 = ref(null)
-    const num1 = ref(0)
-    const num2 = ref(1)
-    const result = computed(() => num1.value + num2.value + props.salt)
+    
+    function calculatLogic(){
+      const num1 = ref(0)
+      const num2 = ref(1)
+      const result = computed(() => num1.value + num2.value + props.salt)
+      return {num1, num2, result}
+    }
 
-    const reactiveData = reactive({ data: { name: 'llz' } })
-    const readonlyData = readonly(reactiveData)
-
-    reactiveData.data.name = 'hago'
-    readonlyData.data.name = 'xxx'
-    console.log(
-      `origin data.name: ${reactiveData.data.name}, readonly data.name:  ${readonlyData.data.name}`
-    )
-
-    console.log(refNum1.value, refNum2.value) // null null
-    onMounted(() => {
-      console.log(refNum1.value, refNum2.value)
-    })
-
-    const config: Config = inject(PROVIDE_INJECT_KEY_COUNT, { defaultValue: 10 })
-    // const p = reactive(config)
+    const {num1, num2, result} = calculatLogic()
     return {
       num1,
       num2,
-      result,
-      refNum1,
-      refNum2,
-      config
+      result
     }
   }
 }

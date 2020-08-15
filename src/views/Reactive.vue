@@ -65,7 +65,7 @@ export default {
     const rawObj = clone(plainObj)
 
     console.log('reactive: markRaw-->', markRaw(rawObj), reactive(rawObj)) // 添加__v_skip属性
-    console.log('toRaw:', rawObj, toRaw(varReactive))
+    console.log('reactive: toRaw-->', rawObj, toRaw(reactive(rawObj)))
 
     /**
      * readOnly, shallowReadOnly

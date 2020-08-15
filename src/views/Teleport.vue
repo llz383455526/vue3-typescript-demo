@@ -9,7 +9,6 @@
         <p>
           this will be moved to #endofbody.
           <br />
-          Pretend that it's a modal
           {{nameRef}}
         </p>
         <Child class="color-red" />

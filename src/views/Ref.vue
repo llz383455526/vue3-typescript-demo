@@ -59,7 +59,7 @@ export default {
     const reactiveObj = reactive({ age: 18 })
     const toRefVar = toRef(reactiveObj, 'age')
     console.log('toRefVar:', toRefVar)
-    toRefVar.value = 13
+    // toRefVar.value = 13
 
     /**
      * 4. toRefs(reactiveObj) 输入一个响应式对象reactiveObj，返回一个普通对象，但普通对象的属性都是Ref对象

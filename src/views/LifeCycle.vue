@@ -65,7 +65,7 @@ export default {
     onBeforeUnmount(() => console.log('lifecycle hook onBeforeUnmount'))
     onUnmounted(() => console.log('lifecycle hook onUnmounted'))
     onErrorCaptured(() => console.log('lifecycle hook onErrorCaptured'))
-    onRenderTracked(() => {console.log('lifecycle hook onRenderTracked')})
+    onRenderTracked((event) => {console.log('lifecycle hook onRenderTracked', event)}) 
     onRenderTriggered(() => console.log('lifecycle hook onRenderTriggered'))
 
     return {

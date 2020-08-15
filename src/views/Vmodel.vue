@@ -1,18 +1,20 @@
 <template>
   <div>
     <h1>v-model demo</h1>
+    <input v-model="inputValue">
     <div>test v-model---> {{visibleRef}}</div>
-    <div>test v-mode:visible2--> {{visibleRef2}}</div>
+    <div>test v-model:visible2--> {{visibleRef2}}</div>
     <VmodelChild v-model="visibleRef" v-model:visible2="visibleRef2"></VmodelChild>
+    
   </div>
 </template>
 <script>
-import { ref, defineComponent, h } from 'vue'
+import { ref, defineComponent, h, watchEffect } from 'vue'
 const VmodelChild = defineComponent({
   name: 'Child',
   props: {
-    modelValue: { type: Boolean, default: false },
-    visible2: { type: Boolean, default: false }
+    modelValue: { type: Boolean, default: true },
+    visible2: { type: Boolean, default: true }
   },
   render() {
     return h('div', [
@@ -58,8 +60,17 @@ export default {
   setup() {
     const visibleRef = ref(false)
     const visibleRef2 = ref(false)
+    const inputValue = ref(1)
 
+
+    setInterval(()=>{
+      inputValue.value++
+    }, 1000)
+    watchEffect(()=>{
+      console.log('new value:', inputValue.value)
+    })
     return {
+      inputValue,
       visibleRef,
       visibleRef2
     }
